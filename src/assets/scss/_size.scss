@@ -1,0 +1,26 @@
+
+@mixin width($value) {
+    width: $value;
+}
+
+@mixin height($value) {
+    height: $value;
+}
+
+@for $i from 0 through 100 {
+    .#{"w-"+$i+"-px"} {
+        @include width( #{$i}px);
+    }
+    .#{"h-"+$i+"-px"} {
+        @include height( #{$i}px);
+    }
+}
+
+@for $i from 0 through 100 {
+    .#{"w-"+$i+"-p"} {
+        @include width( #{percentage($i/100)});
+    }
+    .#{"h-"+$i+"-p"} {
+        @include height(#{percentage($i/100)});
+    }
+}
