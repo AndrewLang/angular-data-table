@@ -14,6 +14,7 @@ export class AppComponent implements OnInit, AfterViewInit {
     Start = false;
     items = [];
     Table: ITableModel;
+    timer: any;
 
     @ViewChild('list') list: ElementRef;
     @ViewChildren('rows') rows: QueryList<any>;
@@ -27,24 +28,7 @@ export class AppComponent implements OnInit, AfterViewInit {
                 { Text: 'Value', Style: 'w-40-p' },
                 { Text: 'Description', Style: 'w-20-p' },
             ],
-            Rows: Observable.create((observer: Observer<ITableRow[]>) => {
-                setInterval(() => {
-                    if (this.Start) {
-                        let now = Date.now();
-                        let row = {
-                            Columns: [
-                                { Text: now, Style: 'w-15-p' },
-                                { Text: now.toString(), Style: 'w-25-p' },
-                                { Text: now, Style: 'w-40-p' },
-                                { Text: `Time: ${now}`, Style: 'w-20-p' }
-                            ]
-                        };
-                        this.items.push(row);
-                        observer.next(this.items);
-                    }
-                }, 50);
-
-            })
+            Rows: this.PromiseData() // this.ObservableData()
         };
 
         // this.Items = Observable.create((observer: Observer<IMessage[]>) => {
@@ -70,9 +54,80 @@ export class AppComponent implements OnInit, AfterViewInit {
     ToggleStart() {
         this.Start = !this.Start;
         this.StartLabel = this.Start ? 'Stop' : 'Start';
+        this.StartTime();
     }
     Clear() {
         this.items = [];
+    }
+    ObservableData() {
+        return Observable.create((observer: Observer<ITableRow[]>) => {
+            setInterval(() => {
+                if (this.Start) {
+                    let now = Date.now();
+                    let row = {
+                        Columns: [
+                            { Text: now, Style: 'w-15-p' },
+                            { Text: now.toString(), Style: 'w-25-p' },
+                            { Text: now, Style: 'w-40-p' },
+                            { Text: `Time: ${now}`, Style: 'w-20-p' }
+                        ]
+                    };
+                    this.items.push(row);
+                    observer.next(this.items);
+                }
+            }, 50);
+
+        });
+    }
+    async PromiseData(): Promise<ITableRow[]> {
+        // setInterval(() => {
+        //     if (this.Start) {
+        //         let now = Date.now();
+        //         let row = {
+        //             Columns: [
+        //                 { Text: now, Style: 'w-15-p' },
+        //                 { Text: now.toString(), Style: 'w-25-p' },
+        //                 { Text: now, Style: 'w-40-p' },
+        //                 { Text: `Time: ${now}`, Style: 'w-20-p' }
+        //             ]
+        //         };
+        //         this.items.push(row);
+        //     }
+        // }, 50);
+
+        let now = Date.now();
+        let row = {
+            Columns: [
+                { Text: now, Style: 'w-15-p' },
+                { Text: now.toString(), Style: 'w-25-p' },
+                { Text: now, Style: 'w-40-p' },
+                { Text: `Time: ${now}`, Style: 'w-20-p' }
+            ]
+        };
+        this.items.push(row);
+
+        return this.items;
+    }
+    StartTime() {
+        if (!this.timer) {
+            this.timer = setInterval(() => {
+                if (this.Start) {
+                    console.log('timer');
+                    let now = Date.now();
+                    let row = {
+                        Columns: [
+                            { Text: now, Style: 'w-15-p' },
+                            { Text: now.toString(), Style: 'w-25-p' },
+                            { Text: now, Style: 'w-40-p' },
+                            { Text: `Time: ${now}`, Style: 'w-20-p' }
+                        ]
+                    };
+                    this.items.push(row);
+                }
+            }, 50);
+        } else {
+            clearInterval(this.timer);
+        }
     }
 }
 

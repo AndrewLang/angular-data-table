@@ -2,7 +2,7 @@ import { TemplateRef } from '@angular/core';
 import { Observable } from 'rxjs';
 
 export interface ITableModel {
-    Rows?: Observable<ITableRow[]>;
+    Rows?: Observable<ITableRow[]> | Promise<ITableRow[]>;
     Columns?: ITableCell[];
 }
 export interface ITableCell {

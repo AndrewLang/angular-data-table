@@ -45,7 +45,7 @@ export class EmptyPipe implements PipeTransform {
             <thead>
                 <tr>
                     <th [class]="item.Style | empty" *ngFor="let item of Table.Columns">
-                        <ng-container  *ngIf="item.Template">
+                        <ng-container  *ngIf="item.Template;">
                             <ng-container *ngTemplateOutlet="item.Template; context: item.DataContext"> </ng-container>
                         </ng-container>
                         <span [class]="item.InnerStyle | empty" *ngIf="!item.Template">{{item.Text}}</span>
