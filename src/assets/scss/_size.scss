@@ -24,3 +24,122 @@
         @include height(#{percentage($i/100)});
     }
 }
+
+
+@mixin padding-hor($value) {
+    padding-left: $value;
+    padding-right: $value;
+}
+
+@mixin padding-ver($value) {
+    padding-top: $value;
+    padding-bottom: $value;
+}
+
+@mixin padding-top ($value) {
+    padding-top: $value;
+}
+
+@mixin padding-bottom($value) {
+    padding-bottom: $value;
+}
+
+@mixin padding-left($value) {
+    padding-left: $value;
+}
+
+@mixin padding-right($value) {
+    padding-right: $value;
+}
+
+@mixin padding($value) {
+    padding: $value;
+}
+
+$start:0;
+$end:10;
+@while $start< $end {
+    .#{"p-t-"+$start} {
+        @include padding-top( #{$start}rem );
+    }
+    .#{"p-r-"+$start} {
+        @include padding-right( #{$start}rem );
+    }
+    .#{"p-b-"+$start} {
+        @include padding-bottom( #{$start}rem );
+    }
+    .#{"p-l-"+$start} {
+        @include padding-left( #{$start}rem );
+    }
+    .#{"p-h-"+$start} {
+        @include padding-hor( #{$start}rem );
+    }
+    .#{"p-v"+$start} {
+        @include padding-ver( #{$start}rem );
+    }
+    .#{"p-"+$start} {
+        @include padding( #{$start}rem );
+    }
+    
+    $start :$start+ 0.25;   
+}
+
+
+
+@mixin margin-hor($value) {
+    margin-left: $value;
+    margin-right: $value;
+}
+
+@mixin margin-ver($value) {
+    margin-top: $value;
+    margin-bottom: $value;
+}
+
+@mixin margin-top ($value) {
+    margin-top: $value;
+}
+
+@mixin margin-bottom($value) {
+    margin-bottom: $value;
+}
+
+@mixin margin-left($value) {
+    margin-left: $value;
+}
+
+@mixin margin-right($value) {
+    margin-right: $value;
+}
+
+@mixin margin($value) {
+    margin: $value;
+}
+
+$start:0;
+$end:10;
+@while $start< $end {
+    .#{"m-t-"+$start} {
+        @include margin-top( #{$start}rem );
+    }
+    .#{"m-r-"+$start} {
+        @include margin-right( #{$start}rem );
+    }
+    .#{"m-b-"+$start} {
+        @include margin-bottom( #{$start}rem );
+    }
+    .#{"m-l-"+$start} {
+        @include margin-left( #{$start}rem );
+    }
+    .#{"m-h-"+$start} {
+        @include margin-hor( #{$start}rem );
+    }
+    .#{"m-v"+$start} {
+        @include margin-ver( #{$start}rem );
+    }
+    .#{"m-"+$start} {
+        @include margin( #{$start}rem );
+    }
+    
+    $start :$start+ 0.25;   
+}
